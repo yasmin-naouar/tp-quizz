@@ -1,6 +1,6 @@
 # Quiz en images — Android (Kotlin + XML)
 
-Application Android éducative avec cinq questions illustrées sur les formes géométriques.
+Application Android éducative avec cinq questions illustrées sur les drapeaux du monde.
 
 ## Fonctionnalités
 - Une seule activité : `MainActivity`.

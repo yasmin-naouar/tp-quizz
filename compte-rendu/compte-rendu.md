@@ -2,7 +2,7 @@ Compte rendu — TP Android : Quiz en images
 
 Étudiant(e) : Anouar Dario Aissaoui
 
-Thème choisi : Les formes géométriques
+Thème choisi : Les drapeaux du monde
 
 Technologies : Kotlin et XML
 
@@ -10,7 +10,7 @@ Activité : MainActivity
 
 1. Présentation du projet
 
-L'application est un petit quiz de 5 questions sur les formes géométriques. À chaque question, l'utilisateur voit une image et choisit la bonne réponse parmi trois boutons. L'appli vérifie la réponse, calcule le score, et à la fin elle affiche le résultat final avec la possibilité de recommencer.
+L'application est un petit quiz de 5 questions sur les drapeaux du monde. À chaque question, l'utilisateur voit une image et choisit la bonne réponse parmi trois boutons. L'appli vérifie la réponse, calcule le score, et à la fin elle affiche le résultat final avec la possibilité de recommencer.
 
 2. Interface et widgets utilisés
 
@@ -32,7 +32,7 @@ Un ScrollView pour que ça marche bien sur les petits écrans.
 
 J'ai créé une data class Question pour stocker l'énoncé, l'image (Int), les 3 choix (Array<String>), l'indice de la bonne réponse et une description pour l'accessibilité.
 
-Les 5 questions sont stockées dans un tableau Kotlin. Les images sont toutes locales dans le dossier res/drawable (triangle, carré, cercle, étoile, rectangle). Pas de base de données ni d'internet.
+Les 5 questions sont stockées dans un tableau Kotlin. Les images sont toutes locales dans le dossier res/drawable (drapeaux de la France, du Japon, de l'Allemagne, de la Suisse et de l'Italie, dessinés en vectoriel). Pas de base de données ni d'internet.
 
 4. Gestion des événements, du score et de la progression
 

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple">#6C4CF1</color>
-    <color name="ink">#201A35</color>
-    <color name="background">#F7F5FF</color>
+    <!-- Palette "nuit" : fond bleu nuit, cartes plus claires, accent ambre. -->
+    <color name="background">#0F172A</color>
+    <color name="surface">#1E293B</color>
+    <color name="outline">#334155</color>
+    <color name="ink">#F1F5F9</color>
+    <color name="ink_muted">#94A3B8</color>
+    <color name="accent">#F59E0B</color>
+    <color name="accent_soft">#3B2F14</color>
+    <color name="on_accent">#1C1300</color>
+    <color name="success">#22C55E</color>
+    <color name="success_soft">#14321F</color>
+    <color name="error">#EF4444</color>
+    <color name="error_soft">#3A1717</color>
 </resources>

@@ -3,171 +3,220 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="28dp">
 
+        <!-- En-tête : titre + score -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="IMAGE QUIZ"
-                android:textColor="@color/ink"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+                    android:text="QUIZ"
+                    android:textColor="@color/accent"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drapeaux du monde"
+                    android:textColor="@color/ink"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#EAE5FF"
-                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_chip"
+                android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
                 android:text="Score : 0/5"
-                android:textColor="@color/purple"
-                android:textSize="15sp"
+                android:textColor="@color/accent"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txt_progress"
+        <!-- Progression -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:text="Progression : 0/5"
-            android:textColor="@color/ink"
-            android:textSize="14sp" />
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_question_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question 1 sur 5"
+                android:textColor="@color/ink"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Progression : 0/5"
+                android:textColor="@color/ink_muted"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress_quiz"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="8dp"
+            android:layout_marginTop="10dp"
             android:max="5"
             android:progress="0"
-            android:progressTint="@color/purple"
-            android:progressBackgroundTint="#E3DDF7" />
+            android:progressDrawable="@drawable/progress_track" />
 
-        <TextView
-            android:id="@+id/txt_question_number"
+        <!-- Carte de la question -->
+        <LinearLayout
+            android:id="@+id/card_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:text="Question 1 sur 5"
-            android:textColor="@color/purple"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_card"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <ImageView
-            android:id="@+id/img_question"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="12dp"
-            android:adjustViewBounds="true"
-            android:background="#FFFFFF"
-            android:contentDescription="Image de la question"
-            android:padding="12dp"
-            android:scaleType="fitCenter" />
+            <ImageView
+                android:id="@+id/img_question"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="Image de la question"
+                android:scaleType="fitCenter" />
 
-        <TextView
-            android:id="@+id/txt_question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Quelle forme voyez-vous ?"
-            android:textColor="@color/ink"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:text="À quel pays appartient ce drapeau ?"
+                android:textColor="@color/ink"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
+        <!-- Choix de réponse -->
         <Button
             android:id="@+id/btn_choix1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ChoiceButton"
             android:layout_marginTop="18dp"
-            android:minHeight="52dp"
-            android:text="Choix 1"
-            android:textAllCaps="false" />
+            android:text="Choix 1" />
 
         <Button
             android:id="@+id/btn_choix2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:minHeight="52dp"
-            android:text="Choix 2"
-            android:textAllCaps="false" />
+            style="@style/ChoiceButton"
+            android:text="Choix 2" />
 
         <Button
             android:id="@+id/btn_choix3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:minHeight="52dp"
-            android:text="Choix 3"
-            android:textAllCaps="false" />
+            style="@style/ChoiceButton"
+            android:text="Choix 3" />
 
+        <!-- Retour après réponse -->
         <TextView
             android:id="@+id/txt_feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
+            android:accessibilityLiveRegion="polite"
             android:gravity="center"
             android:text=""
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:accessibilityLiveRegion="polite" />
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_fun_fact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/ink_muted"
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_suivant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/purple"
+            style="@style/PrimaryButton"
+            android:layout_marginTop="18dp"
             android:enabled="false"
-            android:text="Question suivante"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
+            android:text="Question suivante" />
 
+        <!-- Écran de résultat -->
         <LinearLayout
             android:id="@+id/layout_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_card"
             android:gravity="center"
             android:orientation="vertical"
-            android:paddingTop="22dp"
+            android:padding="24dp"
             android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txt_result_emoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏆"
+                android:textSize="56sp" />
 
             <TextView
                 android:id="@+id/txt_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Résultat final : 0/5"
                 android:textColor="@color/ink"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_rejouer"
+            <TextView
+                android:id="@+id/txt_result_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/purple"
-                android:text="Rejouer"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/ink_muted"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btn_rejouer"
+                style="@style/PrimaryButton"
+                android:layout_marginTop="20dp"
+                android:text="Rejouer" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
