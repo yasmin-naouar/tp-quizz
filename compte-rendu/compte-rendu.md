@@ -1,88 +1,89 @@
-Compte rendu — TP Android : Quiz en images
+# Compte rendu du TP Android : un quiz avec des images
 
-Étudiant(e) : Anouar Dario Aissaoui
+| | |
+|---|---|
+| **Nom** | Yasmine Naouar |
+| **Sujet du quiz** | Les drapeaux des pays |
+| **Langages** | Kotlin et XML |
+| **Écran principal** | `MainActivity` |
 
-Thème choisi : Les drapeaux du monde
+---
 
-Technologies : Kotlin et XML
+## Le but de l'application
 
-Activité : MainActivity
+J'ai fait un quiz simple avec 5 questions sur les drapeaux.
+Pour chaque question, on voit un drapeau et on choisit le bon pays parmi 3 boutons.
+L'application dit si la réponse est bonne ou pas et compte les points.
+À la fin, on voit son score et on peut rejouer.
 
-1. Présentation du projet
+## Comment l'écran est construit
 
-L'application est un petit quiz de 5 questions sur les drapeaux du monde. À chaque question, l'utilisateur voit une image et choisit la bonne réponse parmi trois boutons. L'appli vérifie la réponse, calcule le score, et à la fin elle affiche le résultat final avec la possibilité de recommencer.
+Tout l'écran est dans le fichier `activity_main.xml`. Il y a une seule activité et je n'ai pas utilisé Jetpack Compose.
 
-2. Interface et widgets utilisés
+Voici les éléments que j'ai mis :
 
-L'interface est faite dans le fichier activity_main.xml en utilisant une seule activité (pas de Jetpack Compose). On y trouve :
+- **TextView** : pour le titre, la question, le numéro de la question et le score.
+- **ImageView** : pour montrer le drapeau. J'ai mis `fitCenter` pour que l'image ne soit pas déformée.
+- **ProgressBar** (horizontale) : pour voir où on en est dans le quiz.
+- **3 Button** : un bouton pour chaque réponse.
+- **Bouton « Suivant »** et **bouton « Rejouer »**.
+- **ScrollView** : pour pouvoir descendre si l'écran du téléphone est petit.
 
-Des TextView pour les titres, le score, les numéros et les textes ;
+## Comment les questions sont rangées
 
-Une ImageView pour afficher l'image sans déformation (fitCenter) ;
+J'ai créé une `data class Question`. Elle garde :
 
-Une ProgressBar horizontale pour suivre l'avancement ;
+1. le texte de la question ;
+2. l'image (un `Int` qui pointe vers le drawable) ;
+3. les 3 réponses possibles (`Array<String>`) ;
+4. le numéro de la bonne réponse ;
+5. une petite description de l'image pour l'accessibilité.
 
-Trois Button pour les choix ;
+Les 5 questions sont dans un tableau en Kotlin.
+Les images sont dans `res/drawable` : France, Japon, Allemagne, Suisse et Italie. Ce sont des dessins vectoriels.
+L'application n'utilise ni Internet ni base de données.
 
-Un bouton suivant et un bouton Rejouer ;
+## Ce qui se passe quand on clique
 
-Un ScrollView pour que ça marche bien sur les petits écrans.
+- Je parcours les 3 boutons avec `forEachIndexed` pour leur donner une action.
+- Quand on clique, la fonction `checkAnswer(index)` regarde si la réponse est la bonne :
+  - bonne réponse → on gagne 1 point ;
+  - mauvaise réponse → le score ne change pas.
+- Après un clic, les boutons sont bloqués. On ne peut donc pas gagner des points en cliquant plusieurs fois.
+- La barre de progression avance après chaque réponse, bonne ou mauvaise.
+- Le bouton « Suivant » ne marche pas tant qu'on n'a pas répondu.
+- Après la 5e question, les boutons de réponse sont cachés et le score final s'affiche.
+- Le bouton « Rejouer » remet tout à zéro.
 
-3. Représentation des questions
+## Les tests
 
-J'ai créé une data class Question pour stocker l'énoncé, l'image (Int), les 3 choix (Array<String>), l'indice de la bonne réponse et une description pour l'accessibilité.
+| Ce que je fais | Ce qui doit se passer |
+|---|---|
+| Je lance le quiz | Question 1, score 0/5, 3 réponses visibles |
+| Je donne une bonne réponse | +1 point et la barre avance |
+| Je donne une mauvaise réponse | Le score reste pareil et la barre avance |
+| Je clique plusieurs fois | Les boutons sont bloqués, pas de points en plus |
+| Je passe à la question suivante | Nouveau drapeau, le score est gardé |
+| J'arrive à la fin | Le score final s'affiche (par exemple 5/5 ou 0/5) |
+| Je clique sur « Rejouer » | Retour à la question 1 avec 0 point |
+| J'utilise un petit écran | On peut faire défiler l'écran sans problème |
 
-Les 5 questions sont stockées dans un tableau Kotlin. Les images sont toutes locales dans le dossier res/drawable (drapeaux de la France, du Japon, de l'Allemagne, de la Suisse et de l'Italie, dessinés en vectoriel). Pas de base de données ni d'internet.
+**Résultats obtenus :** (à compléter)
 
-4. Gestion des événements, du score et de la progression
+## Captures d'écran
 
-Les boutons sont parcourus avec un forEachIndexed. Quand l'utilisateur clique, checkAnswer(index) vérifie si c'est correct :
+**Une question avec son image**
 
-Si c'est juste, le score augmente de 1.
+![Une question avec son image](captures/Une%20question%20avec%20son%20image,.png)
 
-Si c'est faux, le score ne bouge pas.
+**Une bonne réponse**
 
-Une variable bloque les clics multiples et désactive les boutons après le choix.
+![Une bonne réponse](captures/Une%20bonne%20r%C3%A9ponse.png)
 
-La progression augmente à chaque réponse (juste ou fausse). Le bouton suivant reste bloqué tant qu'on ne répond pas. À la fin de la 5ème question, les choix disparaissent et le score s'affiche. Le bouton Rejouer remet tout à zéro.
+**Une mauvaise réponse**
 
-5. Tests à réaliser
+![Une mauvaise réponse](captures/Une%20mauvaise%20r%C3%A9ponse.png)
 
-Test
+**L'écran de fin avec le score**
 
-Résultat attendu
-
-Lancer une partie
-
-Question 1, score 0/5, 3 choix affichés
-
-Répondre juste
-
-Score +1, progression +1
-
-Répondre faux
-
-Score inchangé, progression +1
-
-Cliquer plusieurs fois
-
-Boutons désactivés, pas de points en plus
-
-Question suivante
-
-Nouvelle image, score gardé
-
-Fin du quiz
-
-Score final affiché (ex: 5/5 ou 0/5)
-
-Rejouer
-
-Retour au début, tout à 0
-
-Petit écran
-
-Scroll vertical fluide
-
-Résultats réels des tests : (À compléter)
-
+![Écran final avec le score](captures/L%E2%80%99%C3%A9cran%20final%20avec%20le%20score%20obtenu..png)
